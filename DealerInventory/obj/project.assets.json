@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project\\DealerInventory\\DealerInventory.csproj",
+      "projectUniqueName": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project-Server\\Project584_Web_Server\\DealerInventory\\DealerInventory.csproj",
       "projectName": "DealerInventory",
-      "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project\\DealerInventory\\DealerInventory.csproj",
+      "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project-Server\\Project584_Web_Server\\DealerInventory\\DealerInventory.csproj",
       "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project\\DealerInventory\\obj\\",
+      "outputPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project-Server\\Project584_Web_Server\\DealerInventory\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",

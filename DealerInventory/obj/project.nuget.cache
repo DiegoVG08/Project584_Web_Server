@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iwV9uYmSKWWLG2yLxtDGHNZUr2Q6OM6/lYtihoZlJoVTmc72+6ri9siGRu/covlmhW25SDmD2Lg+ow2jrvFsmw==",
+  "dgSpecHash": "VEzuVUVlty9f2eBRWY+Y54lMVNW7RNuzLgnvof6Z221kQpaQp+MmhDEsADRZX5LYwNTH2q3eezYe1PFYZc+AgA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project\\DealerInventory\\DealerInventory.csproj",
+  "projectFilePath": "C:\\Users\\diego\\OneDrive\\Escritorio\\584-Project-Server\\Project584_Web_Server\\DealerInventory\\DealerInventory.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.2\\microsoft.aspnetcore.openapi.7.0.2.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

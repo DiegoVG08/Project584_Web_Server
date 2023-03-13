@@ -4,9 +4,7 @@ namespace DealerInventory
     {
         
 
-        public int Price { get; set; }
-        public string? Make { get; set; }
-        public string? Model { get; set; }
+       
 
 
 
