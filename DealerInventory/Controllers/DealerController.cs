@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DealerInventory.Data;
+using DealerInventory.Data.DealerModel;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,89 +14,103 @@ namespace DealerInventory.Controllers
     public class DealerController : ControllerBase
     {
 
-        private List<Dealer> GetDealers()
-        {
-            return new List<Dealer>()
-        {
-            new Dealer()
-            {
 
-                Make= "Nissan",
-                Model = "Altima",
-                Price = 1000.00
-            },
-            new Dealer()
-            {
-                Make= "Nissan",
-                Model = "Sentra",
-                Price = 1000.00
-            },
-            new Dealer()
-            {
-                Make= "Fiat",
-                Model = "500c",
-                Price = 1000.00
-            },
-            new Dealer()
-            {
-                Make= "Toyota",
-                Model = "Rav4",
-                Price = 1000.00
-            },
-            new Dealer()
-            {
-                Make= "Toyota",
-                Model = "Prius",
-                Price = 1000.00
-            }
-        };
-       }
-    /*    private static double[] Price = new[]
-     {
-        1000.00, 1000.00, 1000.00, 1000.00, 1000.00,1000.00, 1000.00, 1000.00, 1000.00, 1000.00
-    };
-        private static string[] Make = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-        private static string[] Model = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };*/
+        private readonly MasterContext _context;
 
-        // GET: api/<DealerController>
+        public DealerController(MasterContext context)
+        {
+            _context = context;
+        }
+
+       
+        // GET: api/Dealer
         [HttpGet]
-        public IEnumerable<Dealer> Get()
+        public async Task<ActionResult<IEnumerable<CarDealership>>> GetCarDealership()
         {
-
-            return GetDealers();
-
-
+            return await _context.carDealership.ToListAsync();
         }
 
-        // GET api/<DealerController>/5
+        // GET: api/CarDealership
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<CarDealership>> GetDealer(int id)
         {
-            return "value";
+            //get the id of dealerships 
+            var dealer = await _context.carDealership.FindAsync(id);
+
+            if (dealer == null)
+            {
+                return NotFound();
+            }
+
+            return dealer;
         }
 
-        // POST api/<DealerController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<DealerController>/5
+        // PUT: api/CarDealership
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Authorize(Roles = "RegisteredUser")]
+        public async Task<IActionResult> PutDealer(int id, CarDealership dealership)
         {
+            if (id != dealership.DealershipID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(dealership).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DealerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // DELETE api/<DealerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST: api/CarDealership
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        [Authorize(Roles = "RegisteredUser")]
+        public async Task<ActionResult<CarDealership>> PostDealer(CarDealership dealership)
         {
+            _context.carDealership.Add(dealership);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetDealer", new { id = dealership.DealershipID }, dealership);
+        }
+
+        // DELETE: api/Dealer
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> DeleteDealer(int id)
+        {
+            var dealer = await _context.carDealership.FindAsync(id);
+            if (dealer == null)
+            {
+                return NotFound();
+            }
+
+            _context.carDealership.Remove(dealer);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool DealerExists(int id)
+        {
+            return _context.carDealership.Any(e => e.DealershipID == id);
         }
     }
+
+
 }
