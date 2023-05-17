@@ -79,7 +79,7 @@ namespace DealerInventory.Controllers
                 var VehicleTypeId = row[nRow, 5].GetValue<int>();
                 var Make = row[nRow, 6].GetValue<string>();
                 var Model = row[nRow, 7].GetValue<string>();
-                var Year = row[nRow, 8].GetValue<int>();
+               var Year = row[nRow, 8].GetValue<int>();
                 var DealershipId =  row[nRow, 9].GetValue<int>();
 
                 // skip this country if it already exists in the database
@@ -88,7 +88,7 @@ namespace DealerInventory.Controllers
                 // create the CarDealeship entity and fill it with xlsx data 
                 var Vehicle = new VehicleType
                 {
-                    VehicleTypeID =VehicleTypeId,
+                   // VehicleTypeID =VehicleTypeId,
                     Make  = Make,
                     Model = Model,
                     Year = Year,

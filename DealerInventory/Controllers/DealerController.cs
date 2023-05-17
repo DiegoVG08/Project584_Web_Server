@@ -34,6 +34,7 @@ namespace DealerInventory.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CarDealership>> GetDealer(int id)
         {
+
             //get the id of dealerships 
             var dealer = await _context.carDealership.FindAsync(id);
 
@@ -44,6 +45,8 @@ namespace DealerInventory.Controllers
 
             return dealer;
         }
+
+
 
         // PUT: api/CarDealership
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
