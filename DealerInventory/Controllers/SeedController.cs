@@ -76,11 +76,11 @@ namespace DealerInventory.Controllers
                 var row = worksheet.Cells[
                     nRow, 1, nRow, worksheet.Dimension.End.Column];
 
-                var VehicleTypeId = row[nRow, 5].GetValue<int>();
-                var Make = row[nRow, 6].GetValue<string>();
-                var Model = row[nRow, 7].GetValue<string>();
-               var Year = row[nRow, 8].GetValue<int>();
-                var DealershipId =  row[nRow, 9].GetValue<int>();
+               // var VehicleTypeId = row[nRow, 8].GetValue<int>();
+                var Make = row[nRow, 4].GetValue<string>();
+                var Model = row[nRow, 5].GetValue<string>();
+               var Year = row[nRow, 6].GetValue<int>();
+              //  var DealershipId =  row[nRow, 9].GetValue<int>();
 
                 // skip this country if it already exists in the database
                 if (DealerByName.ContainsKey(Make))
@@ -92,7 +92,7 @@ namespace DealerInventory.Controllers
                     Make  = Make,
                     Model = Model,
                     Year = Year,
-                    DealershipID= DealershipId
+                   // DealershipID= DealershipId
                 };
                 // add the new country to the DB context 
                 await _context.VehicleTypes.AddAsync(Vehicle);
@@ -117,18 +117,18 @@ namespace DealerInventory.Controllers
                .ToDictionary(x => (
                    Name: x.Name,
                    Location: x.Location,
-                   ContactInfo: x.ContactInfo,
-                   DealershipID: x.DealershipID));
+                   ContactInfo: x.ContactInfo));
+                   //DealershipID: x.DealershipID));
             // iterates through all rows, skipping the first one 
             for (int nRow = 2; nRow <= nEndRow; nRow++)
             {
                 var row = worksheet.Cells[
                     nRow, 1, nRow, worksheet.Dimension.End.Column];
 
-                var DealershipID = row[nRow, 1].GetValue<string>();
-                var Name = row[nRow, 2].GetValue<string>();
-                var Location = row[nRow, 3].GetValue<string>();
-                var ContactInfo = row[nRow, 4].GetValue<string>();
+               // var DealershipID = row[nRow, 1].GetValue<string>();
+                var Name = row[nRow, 1].GetValue<string>();
+                var Location = row[nRow, 2].GetValue<string>();
+                var ContactInfo = row[nRow, 3].GetValue<string>();
                
 
                 // retrieve country Id by countryName
